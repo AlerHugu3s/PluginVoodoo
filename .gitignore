@@ -125,3 +125,7 @@ bots/*
 plugins/*
 
 config/*
+
+images/*
+
+conf/*

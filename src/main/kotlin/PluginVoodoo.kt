@@ -4,8 +4,7 @@ import net.mamoe.mirai.console.command.CommandManager
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.utils.info
-import org.AlerHughes.Command.EverydayLuckCommand
-import org.AlerHughes.Command.TarotCommand
+import org.AlerHughes.Command.*
 
 
 object PluginVoodoo : KotlinPlugin(
@@ -21,9 +20,14 @@ object PluginVoodoo : KotlinPlugin(
         logger.info { "VoodooPlugin loaded" }
 
         InitTarot()
+        InitDivinatorySymbol()
 
         CommandManager.registerCommand(EverydayLuckCommand)
         CommandManager.registerCommand(TarotCommand)
+        CommandManager.registerCommand(DivinatorySymbolCommand)
+        CommandManager.registerCommand(BanCommand)
+        CommandManager.registerCommand(RandomBanCommand)
+        CommandManager.registerCommand(AllReleaseCommand)
     }
 
     override fun onDisable() {

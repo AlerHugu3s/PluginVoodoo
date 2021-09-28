@@ -3,6 +3,7 @@ grantedPermissionMap:
     - console
   'org.alerhughes.plugin-voodoo:command.vdluck': 
     - 'm*'
-  'org.alerhughes.plugin-voodoo:*': []
+  'org.alerhughes.plugin-voodoo:*': 
+    - 'm*'
   'org.alerhughes.plugin-voodoo:command.vdtarot': 
     - 'm*'

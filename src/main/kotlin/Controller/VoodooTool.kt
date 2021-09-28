@@ -1,16 +1,10 @@
 package org.AlerHughes
-
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
+import org.AlerHughes.Controller.CustomJson
 import org.AlerHughes.Model.Tarot
 
 typealias tarotTable = Map<Int, Tarot>
-internal val CustomJson = Json {
-    prettyPrint = true
-    ignoreUnknownKeys = true
-    isLenient = true
-    allowStructuredMapKeys = true
-}
+
 var tarotsCache: tarotTable =  mapOf()
 
 fun InitTarot()
