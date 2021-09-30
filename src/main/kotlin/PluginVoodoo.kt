@@ -11,7 +11,7 @@ object PluginVoodoo : KotlinPlugin(
     JvmPluginDescription(
         id = "org.AlerHughes.plugin-voodoo",
         name = "PluginVoodoo",
-        version = "1.2.0",
+        version = "1.5.0",
     ) {
         author("AlerHughes")
     }
