@@ -1,11 +1,15 @@
 package org.AlerHughes
+
 import kotlinx.serialization.decodeFromString
 import org.AlerHughes.Controller.CustomJson
 import org.AlerHughes.Model.Tarot
+import java.time.LocalDate
 
 typealias tarotTable = Map<Int, Tarot>
+typealias usedImgTarotList = List<String>
 
 var tarotsCache: tarotTable =  mapOf()
+var usedImgTarotCache: usedImgTarotList = listOf()
 
 fun InitTarot()
 {
@@ -33,4 +37,19 @@ fun GetInfoByTarot(tarot: Tarot): String
     return """
         #${tarot.name} $des
         """.trimMargin("#")
+}
+
+fun JudgeSendTarotImg(tarot: Tarot) : Boolean
+{
+    val localDate = LocalDate.now()
+    val id = tarot.name + localDate.year + localDate.monthValue + localDate.dayOfMonth
+    if (usedImgTarotCache.contains(id))
+    {
+        usedImgTarotCache.plus(id)
+        return true
+    }
+    else
+    {
+        return false
+    }
 }

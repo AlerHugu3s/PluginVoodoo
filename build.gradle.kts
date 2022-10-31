@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.AlerHughes"
-version = "1.5.0"
+version = "1.6.0"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")
@@ -15,6 +15,6 @@ repositories {
 }
 
 dependencies {
-    api("net.mamoe:mirai-console-terminal:2.0.0") // 自行替换版本
-    api("net.mamoe:mirai-core:2.0.0")
+    api("net.mamoe:mirai-console-terminal:2.12.2") // 自行替换版本
+    api("net.mamoe:mirai-core:2.12.2")
 }

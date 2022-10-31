@@ -9,6 +9,7 @@ import net.mamoe.mirai.contact.User
 import net.mamoe.mirai.message.data.At
 import org.AlerHughes.GetInfoByTarot
 import org.AlerHughes.GetRandomTarot
+import org.AlerHughes.JudgeSendTarotImg
 import org.AlerHughes.Model.Tarot
 import org.AlerHughes.PluginVoodoo
 
@@ -23,6 +24,7 @@ object TarotCommand : SimpleCommand(
         val info: String = GetInfoByTarot(tarot)
 
         sendMessage(At(user!!) + PlainText("\n" + info))
-        getGroupOrNull()?.sendImage(PluginVoodoo.dataFolder.resolve(tarot.info.imgUrl))
+        if (JudgeSendTarotImg(tarot))
+            getGroupOrNull()?.sendImage(PluginVoodoo.dataFolder.resolve(tarot.info.imgUrl))
     }
 }

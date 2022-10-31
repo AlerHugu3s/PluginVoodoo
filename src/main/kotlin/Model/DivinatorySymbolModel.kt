@@ -16,7 +16,7 @@ data class DivinatorySymbol(
 data class DivinatorySymbolInfo(
     @SerialName("description") val description: String,
     @SerialName("level") val level: String,
-    )
+)
 
 
 val defaultDivinatorySymbol: DivinatorySymbol = DivinatorySymbol("愚者(The Fool)", DivinatorySymbolInfo("test1","test2"))
