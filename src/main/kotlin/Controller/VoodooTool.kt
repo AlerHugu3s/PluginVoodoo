@@ -6,10 +6,10 @@ import org.AlerHughes.Model.Tarot
 import java.time.LocalDate
 
 typealias tarotTable = Map<Int, Tarot>
-typealias usedImgTarotList = List<String>
+typealias usedImgTarotList = MutableMap<String,Boolean>
 
 var tarotsCache: tarotTable =  mapOf()
-var usedImgTarotCache: usedImgTarotList = listOf()
+var usedImgTarotCache: usedImgTarotList = mutableMapOf()
 
 fun InitTarot()
 {
@@ -43,13 +43,14 @@ fun JudgeSendTarotImg(tarot: Tarot) : Boolean
 {
     val localDate = LocalDate.now()
     val id = tarot.name + localDate.year + localDate.monthValue + localDate.dayOfMonth
-    if (usedImgTarotCache.contains(id))
+    if (!usedImgTarotCache.containsKey(id) || usedImgTarotCache[id] == false)
     {
-        usedImgTarotCache.plus(id)
+        usedImgTarotCache[id] = true
         return true
     }
-    else
+    else if(usedImgTarotCache[id] == true)
     {
         return false
     }
+    return false
 }
