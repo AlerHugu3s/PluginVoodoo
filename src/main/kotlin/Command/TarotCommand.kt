@@ -2,11 +2,9 @@ package org.AlerHughes.Command
 
 import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.console.command.SimpleCommand
-import net.mamoe.mirai.console.command.getGroupOrNull
-import net.mamoe.mirai.contact.Contact.Companion.sendImage
 import net.mamoe.mirai.message.data.PlainText
-import net.mamoe.mirai.contact.User
 import net.mamoe.mirai.message.data.At
+import net.mamoe.mirai.utils.ExternalResource.Companion.uploadAsImage
 import org.AlerHughes.GetInfoByTarot
 import org.AlerHughes.GetRandomTarot
 import org.AlerHughes.JudgeSendTarotImg
@@ -22,9 +20,12 @@ object TarotCommand : SimpleCommand(
     suspend fun CommandSender.handle() {
         val tarot: Tarot = GetRandomTarot()
         val info: String = GetInfoByTarot(tarot)
+        val imgFile = PluginVoodoo.resolveDataFile(tarot.info.imgUrl).uploadAsImage(user!!)
 
-        sendMessage(At(user!!) + PlainText("\n" + info))
         if (JudgeSendTarotImg(tarot))
-            getGroupOrNull()?.sendImage(PluginVoodoo.dataFolder.resolve(tarot.info.imgUrl))
+            sendMessage(At(user!!) + PlainText("\n" + info) + imgFile)
+        else
+            sendMessage(At(user!!) + PlainText("\n" + info))
+
     }
 }

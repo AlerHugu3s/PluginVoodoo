@@ -25,15 +25,10 @@ fun GetRandomTarot() : Tarot
 fun GetInfoByTarot(tarot: Tarot): String
 {
     val randomNum = (0..1).random()
-    val des :String
-    if (randomNum == 0)
-    {
-        des = "\n#逆位\n#" + tarot.info.reverseDescription
-    }
+    val des :String = if (randomNum == 0)
+        "\n#逆位\n#" + tarot.info.reverseDescription
     else
-    {
-        des = "\n#正位\n#" + tarot.info.description
-    }
+        "\n#正位\n#" + tarot.info.description
     return """
         #${tarot.name} $des
         """.trimMargin("#")

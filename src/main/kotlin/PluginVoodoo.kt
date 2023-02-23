@@ -9,12 +9,11 @@ import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.utils.info
 import org.AlerHughes.Command.*
 import org.AlerHughes.Model.Tarot
-import net.mamoe.mirai.console.command.getGroupOrNull
-import net.mamoe.mirai.contact.Contact.Companion.sendImage
 import net.mamoe.mirai.message.data.At
-import net.mamoe.mirai.message.data.Message
+import net.mamoe.mirai.utils.ExternalResource.Companion.uploadAsImage
 import org.AlerHughes.Model.DivinatorySymbol
 import java.time.LocalDate
+import kotlin.math.abs
 import kotlin.random.Random
 
 
@@ -45,9 +44,11 @@ object PluginVoodoo : KotlinPlugin(
             "塔罗牌" {
                 val tarot: Tarot = GetRandomTarot()
                 val info: String = GetInfoByTarot(tarot)
-                subject.sendMessage(At(sender) + PlainText("\n" + info))
+                val imgFile = resolveDataFile(tarot.info.imgUrl).uploadAsImage(subject)
                 if (JudgeSendTarotImg(tarot))
-                    subject.sendImage(PluginVoodoo.dataFolder.resolve(tarot.info.imgUrl))
+                    subject.sendMessage(At(sender) + PlainText("\n" + info) + imgFile)
+                else
+                    subject.sendMessage(At(sender) + PlainText("\n" + info))
             }
 
             "求签" {
@@ -58,8 +59,8 @@ object PluginVoodoo : KotlinPlugin(
 
             "今日运势" {
                 val localDate = LocalDate.now()
-                val luck = Math.abs(Random(sender.id + localDate.year + localDate.monthValue + localDate.dayOfMonth).nextInt()) % 100
-                subject.sendMessage(At(sender) + PlainText("的今日运势为:" + luck))
+                val luck = abs(Random(sender.id + localDate.year + localDate.monthValue + localDate.dayOfMonth).nextInt()) % 100
+                subject.sendMessage(At(sender) + PlainText("的今日运势为:$luck"))
             }
         }
     }
